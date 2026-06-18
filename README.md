@@ -37,3 +37,32 @@ If you found the code and the paper are useful, please kindly cite our paper:
   year={2024}
 }
 ```
+
+
+你现在已经证明三件事了：
+
+1. 环境能跑；
+2. SIGMA 模型代码能跑；
+3. ML-1M 结果已经比较接近论文。
+
+真正卡住的是 Amazon 这些数据。论文表格里的 Games 不是你现在直接下载的原始 Amazon_Video_Games.inter，而是经过某套过滤/预处理后的版本。问题是作者没有直接给一个“最终处理好、统计完全对齐论文”的数据包，所以你现在自己用 RecBole 下载的数据跑出来，统计就对不上。
+
+你现在 Games 原始数据是：
+
+raw users: 2,766,656
+raw items: 137,249
+raw inters: 4,555,500
+
+论文 Games 要的是大概：
+
+users: 55,145
+items: 17,287
+avg length: 9.01
+
+而你默认过滤后变成：
+
+users: 13,407
+items: 10,314
+inters: 118,011
+
+这说明不是训练问题，是数据处理版本不一致。
